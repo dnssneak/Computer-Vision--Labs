@@ -17,11 +17,20 @@ This repository serves as a centralized hub for all practical lab work, code imp
 ├── Lab 01/
 │   ├── CV_Lab01_FA23_BAI_020_YahyaTamimy.ipynb  # PyTorch transfer learning & deep feature extraction
 │   └── Task 01.md                                # Benchmark evaluation results & summary
-└── Lab 02/
-    ├── README.md                                 # Lab 02 execution guide & setup instructions
-    ├── Task 02.docx                             # Original task specification document
-    ├── Task 02.md                               # Comprehensive report, tables & Q&A analysis
-    └── CV_Lab02_SkinLesion_Filtering.ipynb      # PyTorch spatial filtering & CNN benchmark code
+├── Lab 02/
+│   ├── README.md                                 # Lab 02 execution guide & setup instructions
+│   ├── Task 02.md                               # Comprehensive report, tables & Q&A analysis
+│   ├── CV_Lab02_FA23_BAI_020_YahyaTamimy.ipynb  # PyTorch spatial filtering & CNN benchmark code
+│   ├── table1_transfer_learning_results.csv      # Fine-tuning benchmark results
+│   ├── table2_classifier_results.csv             # Machine learning classifier results
+│   └── table3_efficiency_results.csv             # Computational efficiency benchmark
+└── Lab 03/
+    ├── CV_Lab03_FA23_BAI_020_YahyaTamimy (1).ipynb # PyTorch & OpenCV edge detection & benchmark notebook
+    ├── Lab03_Edge_Detection_Report.md             # Comprehensive report, parameter analysis & Q&A
+    ├── table2_canny_parameter_analysis.csv        # Average Canny edge detector parameter metrics
+    ├── table2_canny_parameter_analysis_per_image.csv # Detailed per-class Canny parameter metrics
+    ├── task3_canny_metrics_bar.png                # Quantitative Canny metric visualization
+    └── task3_canny_parameter_grid.png             # Visual comparison grid for Canny parameter tuning
 ```
 
 ---
@@ -43,6 +52,14 @@ This repository serves as a centralized hub for all practical lab work, code imp
   * **Most Destructive Filter**: Sobel Edge filtering caused a severe performance drop ($\approx 21.00\%$ accuracy drop) due to total loss of color and texture features.
   * **Key Takeaway**: End-to-end CNNs learn optimal spatial features dynamically; applying classical spatial smoothing/filtering acts as an information bottleneck that degrades deep feature representation.
 
+### Lab 03: Edge Detection Techniques and Their Impact on Classification Performance
+* **Objective**: Evaluated seven classical edge detection operators (Sobel Gx/Gy/Magnitude, Prewitt, Laplacian, LoG, Canny), analyzed the impact of Gaussian and Salt-and-Pepper noise alongside restoration filtering (Gaussian & Median), performed parameter tuning on Canny edge detection, and benchmarked skin lesion classification performance using binary edge maps versus raw (Lab 01) and filtered (Lab 02) images across classical classifiers (SVM, Random Forest, KNN) and CNNs (ResNet50, EfficientNet-B0).
+* **Key Findings**:
+  * **Optimal Edge Detector**: Multi-stage Canny detector with balanced hysteresis thresholds ($\text{low}=50, \text{high}=150, 3 \times 3 \text{ kernel}$) produced thin, well-localized, connected contours while suppressing noise and interior texture.
+  * **Noise Sensitivity & Restoration**: Second-order operators (Laplacian) exhibited severe noise sensitivity. Median filtering effectively restored impulse noise, whereas Gaussian filtering proved optimal for Gaussian noise.
+  * **Performance Drop on Edge Maps**: Inputting binary edge maps reduced classification accuracy by **15% to 25%** across all models (e.g., SVM accuracy dropped from **71.25%** raw to **48.75%** edge; ResNet50 dropped from **67.50%** raw / **69.38%** filtered to **52.50%** edge).
+  * **Key Takeaway**: Edge maps discard essential dermatoscopic cues (color variegation, melanin distribution, interior texture). Deep networks operating on raw or mildly filtered images remain superior for skin lesion classification.
+
 ---
 
 ## Author Information
@@ -50,3 +67,4 @@ This repository serves as a centralized hub for all practical lab work, code imp
 * **Student Name**: Muhammad Yahya
 * **Registration Number**: FA23-BAI-020
 * **Course**: Computer Vision
+

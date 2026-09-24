@@ -1,0 +1,5 @@
+Configuration,Low Threshold,High Threshold,Kernel Size,Number of Detected Edges (px),Edge Density (%),Edge Fragments (connected components)
+Canny-1,30,100,3x3,2800.0,1.04,55.0
+Canny-2,50,150,3x3,643.33,0.24,14.33
+Canny-3,100,200,3x3,168.33,0.06,5.0
+Canny-4,50,150,5x5,302.33,0.11,5.67

@@ -1,0 +1,13 @@
+Configuration,Low Threshold,High Threshold,Kernel Size,Class,Number of Detected Edges (px),Edge Density (%),Edge Fragments (connected components),Observation
+Canny-1,30,100,3x3,Actinic keratoses / intraepithelial carcinoma,593,0.22,17,"Low thresholds keep weak gradients -> more edges, but some texture/noise is picked up as false edges."
+Canny-2,50,150,3x3,Actinic keratoses / intraepithelial carcinoma,185,0.069,4,Mid-range thresholds balance edge count against false positives.
+Canny-3,100,200,3x3,Actinic keratoses / intraepithelial carcinoma,0,0.0,0,"High thresholds keep only strong gradients -> fewer, cleaner edges, but some true lesion-boundary edges may be dropped (broken edges)."
+Canny-4,50,150,5x5,Actinic keratoses / intraepithelial carcinoma,0,0.0,0,"Mid-range thresholds balance edge count against false positives. Larger Gaussian kernel smooths more before the gradient step -> thinner, less fragmented edges but slightly less fine detail."
+Canny-1,30,100,3x3,Basal cell carcinoma,575,0.213,12,"Low thresholds keep weak gradients -> more edges, but some texture/noise is picked up as false edges."
+Canny-2,50,150,3x3,Basal cell carcinoma,156,0.058,2,Mid-range thresholds balance edge count against false positives.
+Canny-3,100,200,3x3,Basal cell carcinoma,0,0.0,0,"High thresholds keep only strong gradients -> fewer, cleaner edges, but some true lesion-boundary edges may be dropped (broken edges)."
+Canny-4,50,150,5x5,Basal cell carcinoma,0,0.0,0,"Mid-range thresholds balance edge count against false positives. Larger Gaussian kernel smooths more before the gradient step -> thinner, less fragmented edges but slightly less fine detail."
+Canny-1,30,100,3x3,Benign keratosis-like lesions,7232,2.679,136,"Low thresholds keep weak gradients -> more edges, but some texture/noise is picked up as false edges."
+Canny-2,50,150,3x3,Benign keratosis-like lesions,1589,0.589,37,Mid-range thresholds balance edge count against false positives.
+Canny-3,100,200,3x3,Benign keratosis-like lesions,505,0.187,15,"High thresholds keep only strong gradients -> fewer, cleaner edges, but some true lesion-boundary edges may be dropped (broken edges)."
+Canny-4,50,150,5x5,Benign keratosis-like lesions,907,0.336,17,"Mid-range thresholds balance edge count against false positives. Larger Gaussian kernel smooths more before the gradient step -> thinner, less fragmented edges but slightly less fine detail."
