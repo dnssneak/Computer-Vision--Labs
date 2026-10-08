@@ -34,6 +34,11 @@ This repository serves as a centralized hub for all practical lab work, code imp
 └── Lab 04/
     ├── Lab_Assignment1_Lab4.ipynb                 # Skin lesion boundary detection using Canny edge detection & filters
     └── Lab-Assignment1.md                         # Detailed boundary detection report, parameter evaluation & Q&A analysis
+├── Lab 05/
+    ├── CV_Lab05_FA23_BAI_020_YahyaTamimy.ipynb  # HOG feature extraction, parameter tuning & classifier benchmark notebook
+    ├── Lab05_Report.md                         # Comprehensive industrial defect detection report & Q&A
+    ├── Lab05_Report.pdf                        # Exported PDF report
+    └── Result-Plots/                           # Visualization plots (confusion matrices, HOG grids, robustness curves)
 ```
 
 ---
@@ -69,6 +74,14 @@ This repository serves as a centralized hub for all practical lab work, code imp
   * **Canny Threshold Sensitivity**: Lower thresholds (50–100) performed best (mean score **0.048**) as higher thresholds (100–200, 150–250) yielded almost zero edge pixels due to soft, low-contrast lesion borders.
   * **Pre-filter & Edge Combination**: Average + Sobel achieved the top overall ranking for boundary detection (IoU **0.62**), followed by Gaussian + Sobel (IoU **0.63**), as adaptive Otsu thresholding effectively captured soft lesion boundaries compared to fixed Canny hysteresis thresholds.
   * **Noise Reduction**: Spatial smoothing reduced image noise level $\sigma$ from **1.00** (raw) down to **0.28** (Gaussian / Average) and **0.39** (Median).
+
+### Lab 05: HOG-Based Industrial Defect Detection and Classification
+* **Objective**: Developed a Histogram of Oriented Gradients (HOG) feature extraction and classical ML classification pipeline (SVM RBF/Linear, Random Forest, Logistic Regression) on the NEU steel surface defect database for industrial quality control (binary defect detection and 6-class defect classification). Evaluated HOG cell size and orientation parameter grids, model robustness under severe imaging perturbations (noise, blur, illumination changes, rotation), and data augmentation remedies.
+* **Key Findings**:
+  * **Optimal Binary Detection Model**: HOG (16x16 cell size, 12 orientations) paired with RBF-kernel SVM achieved an **F1-score of 0.8446**, **80.20% Accuracy**, and **0.8785 ROC-AUC** on test patches.
+  * **Top 6-Class Multi-Class Classification**: RBF-SVM achieved **90.83% Accuracy** and **0.9081 Macro F1** on the 6-class defect categorization task.
+  * **HOG Parameter Tuning**: Cell size 16x16 with 12 orientations provided optimal feature compression (432 dimensions) with higher performance compared to denser 4x4 cell grids (up to 10,800 dimensions).
+  * **Robustness & Real-Time Latency**: Severe Gaussian noise caused significant degradation ($\Delta F1 = -0.2264$), while small rotations had negligible impact ($\Delta F1 \approx -0.0064$). Data augmentation recovered $+1.02\%$ F1 on perturbed data. Low CPU latency (**2.4 ms/patch**, **32 ms/full image**) enables real-time edge camera deployment.
 
 ---
 
