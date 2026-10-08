@@ -16,7 +16,7 @@ The NEU steel surface defect database (Kaggle train/valid split) was used: 1440 
 
 Every patch is converted to grayscale and resized to a common 64x64 resolution with area interpolation (whole images for the 6-class task: 128x128). Gradients are computed on the intensity image, so colour carries no additional information for this task.
 
-![Fig. 1: preprocessed non-defective and defective patches.](outputs/patches.png)
+![Fig. 1: preprocessed non-defective and defective patches.](./patches.png)
 
 *Fig. 1: preprocessed non-defective and defective patches.*
 
@@ -24,7 +24,7 @@ Every patch is converted to grayscale and resized to a common 64x64 resolution w
 
 HOG features use 2x2-cell blocks with L2-Hys normalisation and square-root gamma compression. The baseline uses 8x8 cells and 9 orientations; the selected configuration (16x16 cells, 12 orientations) produces a 432-dimensional vector per patch. Small cells encode fine texture such as crazing, large cells encode coarse shape.
 
-![Fig. 2: HOG visualisation of a normal patch and one patch per defect type.](outputs/hog_samples.png)
+![Fig. 2: HOG visualisation of a normal patch and one patch per defect type.](./hog_samples.png)
 
 *Fig. 2: HOG visualisation of a normal patch and one patch per defect type.*
 
@@ -63,11 +63,11 @@ HOG parameter study (validation split, SVM-RBF). Best: cell 16x16, 12 orientatio
 
 Final model (HOG 16x16, 12 orient + SVM-RBF) on the test split: accuracy 0.8020, precision 0.8407, recall 0.8485, F1 0.8446, ROC-AUC 0.8785. Confusion matrix: TN=363, FP=140 (good products rejected), FN=132 (defects missed), TP=739. For the 6-class problem the best model (SVM (RBF)) reached accuracy 0.9083 and macro F1 0.9081.
 
-![Fig. 3: validation F1 for every cell-size / orientation combination.](outputs/hog_grid_heatmap.png)
+![Fig. 3: validation F1 for every cell-size / orientation combination.](./hog_grid_heatmap.png)
 
 *Fig. 3: validation F1 for every cell-size / orientation combination.*
 
-![Fig. 4: confusion matrix of the final model.](outputs/confusion_final.png)
+![Fig. 4: confusion matrix of the final model.](./confusion_final.png)
 
 *Fig. 4: confusion matrix of the final model.*
 
@@ -91,7 +91,7 @@ The clean-trained SVM was evaluated on perturbed test patches (Fig. 5). The larg
 | Blur k=5 | 0.6805 | 0.7901 | -0.1215 | -0.0545 |
 | Blur k=9 | 0.6456 | 0.7783 | -0.1565 | -0.0662 |
 
-![Fig. 5: accuracy and F1 under brightness, noise, rotation and blur.](outputs/robustness.png)
+![Fig. 5: accuracy and F1 under brightness, noise, rotation and blur.](./robustness.png)
 
 *Fig. 5: accuracy and F1 under brightness, noise, rotation and blur.*
 
