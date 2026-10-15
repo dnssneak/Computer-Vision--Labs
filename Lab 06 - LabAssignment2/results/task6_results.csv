@@ -1,0 +1,7 @@
+Test,Expected,Predicted,Closest candidate,Keypoints,Reliable matches,RANSAC inliers,Decision,Time (s),Correct,Note
+Original,Eiffel_Tower,Eiffel_Tower,Eiffel_Tower,1125,794,787,Recognized,0.782,Yes,
+Rotated (45 deg),Eiffel_Tower,Eiffel_Tower,Eiffel_Tower,1178,686,677,Recognized,1.085,Yes,
+Resized (50 %),Eiffel_Tower,Eiffel_Tower,Eiffel_Tower,1009,616,605,Recognized,0.583,Yes,
+Reduced brightness,Eiffel_Tower,Eiffel_Tower,Eiffel_Tower,751,589,582,Recognized,0.548,Yes,
+Different viewpoint,Eiffel_Tower,Eiffel_Tower,Eiffel_Tower,1040,658,645,Recognized,0.687,Yes,real photo
+Unknown landmark,Unknown,Unknown (rejected),Eiffel_Tower,427,14,4,Rejected,0.393,No,not in database

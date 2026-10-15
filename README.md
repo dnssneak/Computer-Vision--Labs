@@ -31,14 +31,19 @@ This repository serves as a centralized hub for all practical lab work, code imp
 │   ├── table2_canny_parameter_analysis_per_image.csv # Detailed per-class Canny parameter metrics
 │   ├── task3_canny_metrics_bar.png                # Quantitative Canny metric visualization
 │   └── task3_canny_parameter_grid.png             # Visual comparison grid for Canny parameter tuning
-└── Lab 04/
-    ├── Lab_Assignment1_Lab4.ipynb                 # Skin lesion boundary detection using Canny edge detection & filters
-    └── Lab-Assignment1.md                         # Detailed boundary detection report, parameter evaluation & Q&A analysis
+├── Lab 04/
+│   ├── Lab_Assignment1_Lab4.ipynb                 # Skin lesion boundary detection using Canny edge detection & filters
+│   └── Lab-Assignment1.md                         # Detailed boundary detection report, parameter evaluation & Q&A analysis
 ├── Lab 05/
-    ├── CV_Lab05_FA23_BAI_020_YahyaTamimy.ipynb  # HOG feature extraction, parameter tuning & classifier benchmark notebook
-    ├── Lab05_Report.md                         # Comprehensive industrial defect detection report & Q&A
-    ├── Lab05_Report.pdf                        # Exported PDF report
-    └── Result-Plots/                           # Visualization plots (confusion matrices, HOG grids, robustness curves)
+│   ├── CV_Lab05_FA23_BAI_020_YahyaTamimy.ipynb  # HOG feature extraction, parameter tuning & classifier benchmark notebook
+│   ├── Lab05_Report.md                         # Comprehensive industrial defect detection report & Q&A
+│   ├── Lab05_Report.pdf                        # Exported PDF report
+│   └── Result-Plots/                           # Visualization plots (confusion matrices, HOG grids, robustness curves)
+└── Lab 06 - LabAssignment2/
+    ├── LabAssignment2_FA23_BAI_020_YahyaTamimy.ipynb  # SIFT-based landmark recognition & image retrieval notebook
+    ├── landmark_database/                             # Reference image database (5 landmarks: Colosseum, Eiffel Tower, Great Wall, Statue of Liberty, Taj Mahal)
+    ├── query_images/                                  # Query images for retrieval testing (original, different viewpoint, unknown)
+    └── results/                                       # Output visualizations, descriptor database (.pkl), CSV evaluation metrics
 ```
 
 ---
@@ -82,6 +87,15 @@ This repository serves as a centralized hub for all practical lab work, code imp
   * **Top 6-Class Multi-Class Classification**: RBF-SVM achieved **90.83% Accuracy** and **0.9081 Macro F1** on the 6-class defect categorization task.
   * **HOG Parameter Tuning**: Cell size 16x16 with 12 orientations provided optimal feature compression (432 dimensions) with higher performance compared to denser 4x4 cell grids (up to 10,800 dimensions).
   * **Robustness & Real-Time Latency**: Severe Gaussian noise caused significant degradation ($\Delta F1 = -0.2264$), while small rotations had negligible impact ($\Delta F1 \approx -0.0064$). Data augmentation recovered $+1.02\%$ F1 on perturbed data. Low CPU latency (**2.4 ms/patch**, **32 ms/full image**) enables real-time edge camera deployment.
+
+### Lab 06 (Assignment 2): SIFT-Based Landmark Recognition & Image Retrieval
+* **Objective**: Built a complete content-based image retrieval (CBIR) system using Scale-Invariant Feature Transform (SIFT) for local feature extraction, descriptor matching (BFMatcher with ratio test), and similarity ranking across a 5-class landmark database (Colosseum, Eiffel Tower, Great Wall of China, Statue of Liberty, Taj Mahal). Evaluated retrieval under geometric transformations (rotation, scaling, reduced resolution), viewpoint changes, and unknown/out-of-distribution queries.
+* **Key Findings**:
+  * **SIFT Descriptor Power**: SIFT keypoints robustly captured scale- and rotation-invariant features, enabling reliable matching even under significant viewpoint and photometric variations.
+  * **Retrieval Ranking (Task 4)**: BFMatcher with Lowe's ratio test (threshold 0.75) produced correct top-1 landmark retrieval for the original query and different-viewpoint query, confirming strong descriptor generalization.
+  * **Localization (Task 5)**: Homography-based geometric verification (RANSAC) successfully localized the query landmark within the database reference image by estimating the planar transformation between matched keypoint sets.
+  * **Robustness Evaluation (Task 6)**: The SIFT pipeline maintained correct top-1 retrieval across rotation, resizing, and moderate resolution reduction, while confidently rejecting the unknown-landmark query (low inlier count below threshold).
+  * **Leave-One-Out Evaluation**: Quantitative leave-one-out cross-validation across the landmark database confirmed consistent per-class retrieval performance, with results summarized in `leave_one_out_results.csv`.
 
 ---
 

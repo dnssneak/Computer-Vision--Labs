@@ -1,0 +1,21 @@
+Landmark,Image,Predicted,Closest candidate,Reliable matches,RANSAC inliers,Outcome
+Colosseum,colosseum_1.jpg,Colosseum,Colosseum,706,686,Correct
+Colosseum,colosseum_2.jpg,Colosseum,Colosseum,664,632,Correct
+Colosseum,colosseum_3.jpg,Colosseum,Colosseum,710,687,Correct
+Colosseum,colosseum_4.jpg,Colosseum,Colosseum,681,660,Correct
+Eiffel_Tower,eiffel_1.jpg,Eiffel_Tower,Eiffel_Tower,653,650,Correct
+Eiffel_Tower,eiffel_2.jpg,Eiffel_Tower,Eiffel_Tower,600,597,Correct
+Eiffel_Tower,eiffel_3.jpg,Eiffel_Tower,Eiffel_Tower,657,588,Correct
+Eiffel_Tower,eiffel_4.jpg,Eiffel_Tower,Eiffel_Tower,567,564,Correct
+Great_Wall_of_China,great_wall_1.jpg,Great_Wall_of_China,Great_Wall_of_China,1328,1324,Correct
+Great_Wall_of_China,great_wall_2.jpg,Great_Wall_of_China,Great_Wall_of_China,1330,1327,Correct
+Great_Wall_of_China,great_wall_3.jpg,Great_Wall_of_China,Great_Wall_of_China,1257,1254,Correct
+Great_Wall_of_China,great_wall_4.jpg,Great_Wall_of_China,Great_Wall_of_China,1280,1277,Correct
+Statue_of_Liberty,statue_1.jpg,Statue_of_Liberty,Statue_of_Liberty,308,301,Correct
+Statue_of_Liberty,statue_2.jpg,Statue_of_Liberty,Statue_of_Liberty,270,261,Correct
+Statue_of_Liberty,statue_3.jpg,Statue_of_Liberty,Statue_of_Liberty,309,301,Correct
+Statue_of_Liberty,statue_4.jpg,Statue_of_Liberty,Statue_of_Liberty,302,294,Correct
+Taj_Mahal,taj_1.jpg,Taj_Mahal,Taj_Mahal,508,497,Correct
+Taj_Mahal,taj_2.jpg,Taj_Mahal,Taj_Mahal,347,338,Correct
+Taj_Mahal,taj_3.jpg,Taj_Mahal,Taj_Mahal,506,504,Correct
+Taj_Mahal,taj_4.jpg,Taj_Mahal,Taj_Mahal,413,408,Correct
