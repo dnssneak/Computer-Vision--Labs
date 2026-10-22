@@ -39,11 +39,15 @@ This repository serves as a centralized hub for all practical lab work, code imp
 │   ├── Lab05_Report.md                         # Comprehensive industrial defect detection report & Q&A
 │   ├── Lab05_Report.pdf                        # Exported PDF report
 │   └── Result-Plots/                           # Visualization plots (confusion matrices, HOG grids, robustness curves)
-└── Lab 06 - LabAssignment2/
-    ├── LabAssignment2_FA23_BAI_020_YahyaTamimy.ipynb  # SIFT-based landmark recognition & image retrieval notebook
-    ├── landmark_database/                             # Reference image database (5 landmarks: Colosseum, Eiffel Tower, Great Wall, Statue of Liberty, Taj Mahal)
-    ├── query_images/                                  # Query images for retrieval testing (original, different viewpoint, unknown)
-    └── results/                                       # Output visualizations, descriptor database (.pkl), CSV evaluation metrics
+├── Lab 06 - LabAssignment2/
+│   ├── LabAssignment2_FA23_BAI_020_YahyaTamimy.ipynb  # SIFT-based landmark recognition & image retrieval notebook
+│   ├── landmark_database/                             # Reference image database (5 landmarks: Colosseum, Eiffel Tower, Great Wall, Statue of Liberty, Taj Mahal)
+│   ├── query_images/                                  # Query images for retrieval testing (original, different viewpoint, unknown)
+│   └── results/                                       # Output visualizations, descriptor database (.pkl), CSV evaluation metrics
+└── Lab 07/
+    ├── Lab07_FA23_BAI_020_YahyaTamimy.ipynb  # GA-based HOG feature selection & SVM classification on PneumoniaMNIST
+    ├── Lab07-Report.md                        # Full report with methodology, tables, results & discussion
+    └── Images/                                # Visualizations: samples, HOG gradients, GA fitness curves, confusion matrices, feature maps
 ```
 
 ---
@@ -96,6 +100,16 @@ This repository serves as a centralized hub for all practical lab work, code imp
   * **Localization (Task 5)**: Homography-based geometric verification (RANSAC) successfully localized the query landmark within the database reference image by estimating the planar transformation between matched keypoint sets.
   * **Robustness Evaluation (Task 6)**: The SIFT pipeline maintained correct top-1 retrieval across rotation, resizing, and moderate resolution reduction, while confidently rejecting the unknown-landmark query (low inlier count below threshold).
   * **Leave-One-Out Evaluation**: Quantitative leave-one-out cross-validation across the landmark database confirmed consistent per-class retrieval performance, with results summarized in `leave_one_out_results.csv`.
+
+### Lab 07: Improving HOG-Based Medical Image Classification Using a Genetic Algorithm
+* **Objective**: Evaluated whether Genetic Algorithm (GA)-based feature selection can improve the classification performance of HOG features while reducing feature dimensionality on medical images. Applied HOG (9 orientations, 8×8 pixels/cell, 2×2 cells/block, L2-Hys normalisation → 8100 features) on PneumoniaMNIST chest X-rays (28×28 upscaled to 128×128), then used a binary-chromosome GA to select an optimal feature subset, and compared baseline HOG + RBF-SVM against GA-HOG + RBF-SVM.
+* **Key Findings**:
+  * **GA Did Not Improve Classification**: Every test metric was slightly lower after GA selection — Macro-F1 went from **82.05%** (baseline) to **81.62%** (GA-HOG), a two-image difference within sampling noise.
+  * **Large Dimensionality Reduction**: GA-B reduced features from **8100 to 2530** (**68.8% fewer**), with the selected features spread evenly across all image regions.
+  * **Inference Speedup**: Prediction time dropped from **9.62 ms/image** to **2.38 ms/image** (~**4× faster**), making GA-HOG attractive for deployment-time efficiency.
+  * **Slower Training Pipeline**: Despite faster SVM training (305.8 s → 84.8 s), the GA search itself (782.9 s) made the total pipeline **2.7× slower** (335.5 s → 897.4 s).
+  * **Validation vs. Test Gap**: Both models scored ~96% macro-F1 on validation but ~82% on test, primarily due to class distribution shift (10% normal in train vs. 37.5% normal in test) causing many normal scans to be misclassified as pneumonia.
+  * **Key Takeaway**: GA-HOG is effective as a **compression method** (68.8% feature reduction, 4× faster inference) but did not act as an accuracy booster for this dataset and configuration.
 
 ---
 
