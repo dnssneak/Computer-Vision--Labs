@@ -44,10 +44,14 @@ This repository serves as a centralized hub for all practical lab work, code imp
 │   ├── landmark_database/                             # Reference image database (5 landmarks: Colosseum, Eiffel Tower, Great Wall, Statue of Liberty, Taj Mahal)
 │   ├── query_images/                                  # Query images for retrieval testing (original, different viewpoint, unknown)
 │   └── results/                                       # Output visualizations, descriptor database (.pkl), CSV evaluation metrics
-└── Lab 07/
-    ├── Lab07_FA23_BAI_020_YahyaTamimy.ipynb  # GA-based HOG feature selection & SVM classification on PneumoniaMNIST
-    ├── Lab07-Report.md                        # Full report with methodology, tables, results & discussion
-    └── Images/                                # Visualizations: samples, HOG gradients, GA fitness curves, confusion matrices, feature maps
+├── Lab 07/
+│   ├── Lab07_FA23_BAI_020_YahyaTamimy.ipynb  # GA-based HOG feature selection & SVM classification on PneumoniaMNIST
+│   ├── Lab07-Report.md                        # Full report with methodology, tables, results & discussion
+│   └── Images/                                # Visualizations: samples, HOG gradients, GA fitness curves, confusion matrices, feature maps
+└── Lab 08 - Lab Mid/
+    ├── FA23_BAI_020_YahyaTamimy_LabMid.ipynb  # HOG vs SIFT (fixed grid) + LinearSVC on BloodMNIST, robustness tests
+    ├── FA23_BAI_020_YahyaTamimy_LabMid.md     # Exported report with code, outputs & answers (Q1–Q5)
+    └── Result-Images/                         # Sample grids, HOG pictures, SIFT keypoints, confusion matrices, robustness plot
 ```
 
 ---
@@ -110,6 +114,23 @@ This repository serves as a centralized hub for all practical lab work, code imp
   * **Slower Training Pipeline**: Despite faster SVM training (305.8 s → 84.8 s), the GA search itself (782.9 s) made the total pipeline **2.7× slower** (335.5 s → 897.4 s).
   * **Validation vs. Test Gap**: Both models scored ~96% macro-F1 on validation but ~82% on test, primarily due to class distribution shift (10% normal in train vs. 37.5% normal in test) causing many normal scans to be misclassified as pneumonia.
   * **Key Takeaway**: GA-HOG is effective as a **compression method** (68.8% feature reduction, 4× faster inference) but did not act as an accuracy booster for this dataset and configuration.
+
+### Lab 08 (Lab Mid): HOG vs SIFT on Blood-Cell Images
+* **Objective**: Built two classical pipelines — **HOG + LinearSVC** and **fixed-grid SIFT + LinearSVC** — on four BloodMNIST classes (eosinophil, monocyte, neutrophil, platelet; 100/30/30 images per class for train/val/test, 64×64 → grayscale 128×128). Chose `C ∈ {0.1, 1, 10}` on validation only, then tested the frozen models on clean, **20°-rotated**, and **Gaussian-noise (σ = 0.05)** test sets.
+* **Key Findings**:
+  * **Feature Lengths**: HOG (8×8 cells, 9 orientations, 2×2 blocks) → **8100** features; SIFT on a fixed 4×4 grid (keypoint size 32) → 16 × 128 = **2048** features. Both hand calculations matched the code.
+  * **Variable Keypoints Problem**: Standard SIFT detection gave **11–190** keypoints per image (mean **74.11**), which can't be fed to an SVM as a fixed-length vector. Placing keypoints on a fixed grid solved this.
+  * **Validation Performance**: SIFT-grid + SVM (**82.50%** acc, **0.822** macro-F1) beat HOG + SVM (**76.67%** acc, **0.765** macro-F1), with C = 0.1 chosen for both.
+  * **Robustness (Test Set)**:
+
+    | Model | Clean | Rotated 20° | Noisy σ=0.05 |
+    |---|---|---|---|
+    | HOG + SVM | 68.33% | 65.83% | 56.67% |
+    | SIFT + SVM | 75.00% | 59.17% | 74.17% |
+
+  * **Rotation vs. Noise**: SIFT-grid lost the most accuracy under rotation (**−15.83 pts**) because keypoint angles were fixed at 0. HOG lost the most under noise (**−11.67 pts**), while SIFT barely changed under noise (**−0.83 pts**) thanks to Gaussian smoothing at the keypoint scale.
+  * **Most Confused Classes**: Both models confused **eosinophil ↔ monocyte** the most (HOG: 13 errors, SIFT: 10). Converting to grayscale removes the orange-red granule colour that normally tells eosinophils apart.
+  * **Key Takeaway**: Fixed-grid SIFT was more reliable overall (mean rotated/noisy accuracy **66.7%** vs **61.3%** for HOG). The prediction made before the experiment was only partly correct: it was right about noise and wrong about rotation.
 
 ---
 
