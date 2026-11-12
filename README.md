@@ -48,10 +48,12 @@ This repository serves as a centralized hub for all practical lab work, code imp
 │   ├── Lab07_FA23_BAI_020_YahyaTamimy.ipynb  # GA-based HOG feature selection & SVM classification on PneumoniaMNIST
 │   ├── Lab07-Report.md                        # Full report with methodology, tables, results & discussion
 │   └── Images/                                # Visualizations: samples, HOG gradients, GA fitness curves, confusion matrices, feature maps
-└── Lab 08 - Lab Mid/
-    ├── FA23_BAI_020_YahyaTamimy_LabMid.ipynb  # HOG vs SIFT (fixed grid) + LinearSVC on BloodMNIST, robustness tests
-    ├── FA23_BAI_020_YahyaTamimy_LabMid.md     # Exported report with code, outputs & answers (Q1–Q5)
-    └── Result-Images/                         # Sample grids, HOG pictures, SIFT keypoints, confusion matrices, robustness plot
+├── Lab 08 - Lab Mid/
+│   ├── FA23_BAI_020_YahyaTamimy_LabMid.ipynb  # HOG vs SIFT (fixed grid) + LinearSVC on BloodMNIST, robustness tests
+│   ├── FA23_BAI_020_YahyaTamimy_LabMid.md     # Exported report with code, outputs & answers (Q1–Q5)
+│   └── Result-Images/                         # Sample grids, HOG pictures, SIFT keypoints, confusion matrices, robustness plot
+└── Lab 09 - LabAssignment/
+    └── Draft_Paper(020).pdf                   # Research proposal: Calibrating NetLogo Traffic Model from YOLOv8 Tracks
 ```
 
 ---
@@ -133,6 +135,14 @@ This repository serves as a centralized hub for all practical lab work, code imp
   * **Key Takeaway**: Fixed-grid SIFT was more reliable overall (mean rotated/noisy accuracy **66.7%** vs **61.3%** for HOG). The prediction made before the experiment was only partly correct: it was right about noise and wrong about rotation.
 
 ---
+
+### Lab 09 (Lab Assignment): From Pixels to Agents — Calibrating a Heterogeneous NetLogo Traffic Model from YOLOv8 Vehicle Tracks
+* **Objective**: Formulated a research paper proposal developing an offline vision-to-simulation framework that connects monocular traffic camera video to a heterogeneous agent-based microscopic traffic simulation in NetLogo. The proposed pipeline leverages YOLOv8 detection, ByteTrack multi-object tracking, homography-based ground-plane projection, class-specific Intelligent Driver Model (IDM) calibration (cars, two-wheelers, heavy vehicles), and evaluates adaptive vs. fixed-time signal-control policies alongside perception-error propagation.
+* **Key Components & Proposed Methodology**:
+  * **Computer Vision Pipeline**: Utilizes YOLOv8 for vehicle detection and ByteTrack for robust temporal association across occlusions. Applies homography estimation from measured ground-control points (GCPs) to project bottom-center bounding-box coordinates to metric ground coordinates for trajectory, speed, arrival headway, and discharge headway extraction.
+  * **Agent-Based Traffic Modeling**: Translates extracted class trajectories into a heterogeneous NetLogo simulation featuring three distinct vehicle classes (cars, two-wheelers, heavy vehicles) parameterized by class-specific IDM car-following parameters.
+  * **Calibration & Validation Framework**: Compares class-aware calibration against homogeneous and class-mix-only baselines on held-out validation sets across queue lengths, discharge headways, and speed distributions.
+  * **Signal Control & Perception Error Sensitivity**: Formulates comparative evaluation of fixed-time, vehicle-actuated, and queue-adaptive signal control, while explicitly quantifying the sensitivity of simulated delay and policy rankings against vision errors (detection misses, class confusion, and count bias).
 
 ## Author Information
 
