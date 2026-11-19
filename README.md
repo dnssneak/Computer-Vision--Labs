@@ -52,8 +52,11 @@ This repository serves as a centralized hub for all practical lab work, code imp
 │   ├── FA23_BAI_020_YahyaTamimy_LabMid.ipynb  # HOG vs SIFT (fixed grid) + LinearSVC on BloodMNIST, robustness tests
 │   ├── FA23_BAI_020_YahyaTamimy_LabMid.md     # Exported report with code, outputs & answers (Q1–Q5)
 │   └── Result-Images/                         # Sample grids, HOG pictures, SIFT keypoints, confusion matrices, robustness plot
-└── Lab 09 - LabAssignment/
-    └── Draft_Paper(020).pdf                   # Research proposal: Calibrating NetLogo Traffic Model from YOLOv8 Tracks
+├── Lab 09 - LabAssignment/
+│   └── Draft_Paper(020).pdf                   # Research proposal: Calibrating NetLogo Traffic Model from YOLOv8 Tracks
+└── Lab 10/
+    ├── RegressionTask_FA23_BAI_020_YahyaTamimy.ipynb  # Comparative implementation of 6 regression algorithms on Diabetes dataset
+    └── Regression_Report_FA23_BAI_020_YahyaTamimy.md # Detailed experimental report with evaluations, comparisons & plots
 ```
 
 ---
@@ -143,6 +146,28 @@ This repository serves as a centralized hub for all practical lab work, code imp
   * **Agent-Based Traffic Modeling**: Translates extracted class trajectories into a heterogeneous NetLogo simulation featuring three distinct vehicle classes (cars, two-wheelers, heavy vehicles) parameterized by class-specific IDM car-following parameters.
   * **Calibration & Validation Framework**: Compares class-aware calibration against homogeneous and class-mix-only baselines on held-out validation sets across queue lengths, discharge headways, and speed distributions.
   * **Signal Control & Perception Error Sensitivity**: Formulates comparative evaluation of fixed-time, vehicle-actuated, and queue-adaptive signal control, while explicitly quantifying the sensitivity of simulated delay and policy rankings against vision errors (detection misses, class confusion, and count bias).
+
+### Lab 10: Comparative Implementation of Machine Learning Regression Algorithms
+* **Objective**: Implemented and benchmarked six supervised regression algorithms (Linear Regression, Decision Tree Regression, Random Forest Regression, Neural Network Regression (MLPRegressor), XGBoost Regression, and K-Nearest Neighbors Regression) on the Diabetes regression dataset (sklearn.datasets.load_diabetes) predicting disease progression from Body Mass Index (BMI).
+* **Key Methodology & Experimental Setup**:
+  * **Dataset & Split**: Single input predictor (BMI, unscaled raw units) predicting disease progression score over a shared 80:20 train/test split (353 train, 89 test). Preprocessing (StandardScaler) was strictly fitted on training data only to prevent data leakage.
+  * **Evaluation Metrics**: Comprehensive evaluation across Mean Absolute Error (MAE), Mean Squared Error (MSE), Root Mean Squared Error (RMSE), and Coefficient of Determination (R²).
+* **Key Findings & Performance Comparison**:
+
+  | Rank (by RMSE) | Algorithm | MAE | MSE | RMSE | R² |
+  |---:|---|---:|---:|---:|---:|
+  | 1 | **XGBoost Regression** | 51.2092 | **3983.4308** | **63.1144** | **0.2481** |
+  | 2 | **Linear Regression** | 52.2600 | 4061.8259 | 63.7325 | 0.2334 |
+  | 3 | **Random Forest Regression** | 51.1834 | 4097.0918 | 64.0085 | 0.2267 |
+  | 4 | **Decision Tree Regression** | 52.1313 | 4130.6680 | 64.2703 | 0.2204 |
+  | 5 | **KNN Regression** | **50.7154** | 4166.4215 | 64.5478 | 0.2136 |
+  | 6 | **Neural Network Regression** | 52.5289 | 4294.9432 | 65.5358 | 0.1894 |
+
+  * **Optimal Model by RMSE**: XGBoost achieved top overall performance (RMSE **63.1144**, R² **0.2481**), closely followed by the baseline Linear Regression (RMSE **63.7325**).
+  * **Optimal Model by MAE**: KNN Regression achieved the lowest average absolute deviation (MAE **50.7154**).
+  * **Key Takeaway**: Non-linear tree ensembles and simple linear baselines performed closely on the single-predictor problem, while over-parameterized neural networks yielded the highest test error, illustrating that model complexity must align with data scale.
+
+---
 
 ## Author Information
 
