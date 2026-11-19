@@ -56,7 +56,8 @@ This repository serves as a centralized hub for all practical lab work, code imp
 │   └── Draft_Paper(020).pdf                   # Research proposal: Calibrating NetLogo Traffic Model from YOLOv8 Tracks
 └── Lab 10/
     ├── RegressionTask_FA23_BAI_020_YahyaTamimy.ipynb  # Comparative implementation of 6 regression algorithms on Diabetes dataset
-    └── Regression_Report_FA23_BAI_020_YahyaTamimy.md # Detailed experimental report with evaluations, comparisons & plots
+    ├── Regression_Report_FA23_BAI_020_YahyaTamimy.md # Detailed experimental report with evaluations, comparisons & plots
+    └── figures/                                       # Scatter plots (actual vs. predicted for each model) & RMSE comparison chart
 ```
 
 ---
