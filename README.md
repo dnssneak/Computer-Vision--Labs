@@ -54,10 +54,15 @@ This repository serves as a centralized hub for all practical lab work, code imp
 │   └── Result-Images/                         # Sample grids, HOG pictures, SIFT keypoints, confusion matrices, robustness plot
 ├── Lab 09 - LabAssignment/
 │   └── Draft_Paper(020).pdf                   # Research proposal: Calibrating NetLogo Traffic Model from YOLOv8 Tracks
-└── Lab 10/
-    ├── RegressionTask_FA23_BAI_020_YahyaTamimy.ipynb  # Comparative implementation of 6 regression algorithms on Diabetes dataset
-    ├── Regression_Report_FA23_BAI_020_YahyaTamimy.md # Detailed experimental report with evaluations, comparisons & plots
-    └── figures/                                       # Scatter plots (actual vs. predicted for each model) & RMSE comparison chart
+├── Lab 10/
+│   ├── RegressionTask_FA23_BAI_020_YahyaTamimy.ipynb  # Comparative implementation of 6 regression algorithms on Diabetes dataset
+│   ├── Regression_Report_FA23_BAI_020_YahyaTamimy.md # Detailed experimental report with evaluations, comparisons & plots
+│   └── figures/                                       # Scatter plots (actual vs. predicted for each model) & RMSE comparison chart
+├── Lab11 - Student Week/
+│   └── README.md                                      # Note: No lab session held due to Student Week
+└── Lab12/
+    ├── Lab12_FA23_BAI_020_YahyaTamimy.ipynb           # CNN feature-map pipeline, parameter audit & critical analysis notebook
+    └── Lab-Report-Lab12.md                            # Comprehensive report covering 5x4 filter stages, CNN audit & Q1–Q5
 ```
 
 ---
@@ -167,6 +172,17 @@ This repository serves as a centralized hub for all practical lab work, code imp
   * **Optimal Model by RMSE**: XGBoost achieved top overall performance (RMSE **63.1144**, R² **0.2481**), closely followed by the baseline Linear Regression (RMSE **63.7325**).
   * **Optimal Model by MAE**: KNN Regression achieved the lowest average absolute deviation (MAE **50.7154**).
   * **Key Takeaway**: Non-linear tree ensembles and simple linear baselines performed closely on the single-predictor problem, while over-parameterized neural networks yielded the highest test error, illustrating that model complexity must align with data scale.
+
+### Lab 11: Student Week
+* **Note**: No lab session or practical assignment was held during Week 11 due to university **Student Week** activities.
+
+### Lab 12: CNN Feature Visualization, Parameter Audit and Critical Analysis
+* **Objective**: Built a transparent stage-by-stage CNN feature-extraction pipeline applying five 3×3 spatial kernels (Horizontal Edge, Vertical Edge, Sharpen, Gaussian Blur, Emboss) across four stages (Raw Convolution, ReLU, 2×2 Max Pooling, 2×2 Average Pooling), performed manual vs. Keras parameter audits on two CNN architectures, and investigated key architectural and training behaviors.
+* **Key Findings**:
+  * **ReLU Blackout & Filter Responses**: Zero-sum directional edge filters zeroed out roughly half of all pixels after ReLU (**46.1%** black for horizontal edge, **53.2%** for vertical edge), retaining only one polarity of each edge pair, whereas non-negative Gaussian blur remained nearly unchanged (**0.3%** black).
+  * **Max vs. Average Pooling**: Max pooling preserved peak responses across thin edges and sharpened rims (**9.42%** strong pixels vs. **0.27%** with average pooling on the sharpen map), whereas average pooling better retained dark ink strokes on white backgrounds (**530** vs. **279** stroke pixels).
+  * **Parameter Audit & Receptive Field**: Expanding kernels from 3×3 (**Model A: 710 params**) to 5×5 (**Model B: 1,750 params**) matched Keras `model.summary()` exactly and increased total parameters by **146.48%** (**173.33%** in conv layers). Replacing a 5×5 conv with two stacked 3×3 layers achieves the same 5×5 receptive field while saving **28%** of weights (`18C²` vs. `25C²`) and adding extra non-linearity.
+  * **Commutativity & Filter Collapse**: Verified analytically and numerically that `ReLU(MaxPool(x)) = MaxPool(ReLU(x))` (allowing pooling first on 4× fewer elements), while demonstrating how identical initialization (cosine similarity **0.948**) or excessive learning rates (5/5 dead ReLU filters) cause filter redundancy—resolved via He initialization, lower learning rates, and Leaky ReLU (**100%** synthetic accuracy).
 
 ---
 
